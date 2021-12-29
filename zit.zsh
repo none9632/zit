@@ -70,12 +70,10 @@ zit-install() {
 # do both above in one step
 zit-install-load() {
   _zit-param-validation 'Git repo' "${1}" || return 1
-  _zit-param-validation 'Module directory' "${2}" || return 2
-  _zit-param-validation '.zsh file' "${3}" || return 3
 
-  local git_repo="${1}"
-  local module_dir="${2}"
-  local dot_zsh="${3}"
+  local git_repo="https://github.com/${1}"
+  local module_dir="${2:-${git_repo##*/}}"
+  local dot_zsh="${3:-${git_repo##*/}.plugin.zsh}"
 
   zit-install "${git_repo}" "${module_dir}"
   zit-load "${module_dir}" "${dot_zsh}"
